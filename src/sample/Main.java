@@ -4,9 +4,12 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class Main extends Application {
 
@@ -83,6 +86,33 @@ public class Main extends Application {
     }
 
     public void tableLayout(){
+        GridPane root = new GridPane();
+        stage.setTitle("Table");
+        root.setAlignment(Pos.CENTER);
+        root.setVgap(50);
+        root.setHgap(50);
+
+        TableView<Book> tableViewBooks = new TableView<>();
+
+        TableColumn<Book, String> columnTitle = new TableColumn<>("Title");
+        columnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        columnTitle.setMinWidth(200);
+
+        TableColumn<Book, Integer> columnPages = new TableColumn<>("Pages");
+        columnPages.setCellValueFactory(new PropertyValueFactory<>("pages"));
+        columnPages.setMinWidth(100);
+
+        tableViewBooks.getColumns().addAll(columnTitle, columnPages);
+        root.add(tableViewBooks, 0,0);
+
+        List<Book> books = DbController.getFromDB();
+        tableViewBooks.getItems().addAll(books);
+
+        Button back = new Button("Back");
+        back.setOnAction(event -> addingLayout());
+        root.add(back,0,2);
+
+        stage.getScene().setRoot(root);
 
     }
 }
