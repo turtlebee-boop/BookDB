@@ -23,7 +23,7 @@ public class DbController {
     }
 
     public static List<Book> getFromDB(){
-        List<Book> students = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
 
         String sql = "SELECT * FROM books;";
 
@@ -36,13 +36,13 @@ public class DbController {
                 String title = resultSet.getString("title");
                 int pages = resultSet.getInt("pages");
                 Book book = new Book(title, pages);
-                students.add(book);
+                books.add(book);
             }
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return students;
+        return books;
     }
 }
