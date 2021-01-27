@@ -9,7 +9,7 @@ public class DbController {
     private static final String CONN = "jdbc:sqlite:books.db";
 
     public static void addToDB(Book book) {
-        String sql = "INSERT INTO Students (title, pages ) VALUES (?, ?);";
+        String sql = "INSERT INTO books (title, pages ) VALUES (?, ?);";
         try {
             Connection connection = DriverManager.getConnection(CONN);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
